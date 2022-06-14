@@ -1,0 +1,1 @@
+[{"title":"prueba5","price":500,"thumbnail":"prueba5.jpg","id":1}]{"title":"prueba5","price":500,"thumbnail":"prueba5.jpg","id":3}]{"title":"prueba5","price":500,"thumbnail":"prueba5.jpg","id":3}]
