@@ -1,0 +1,1 @@
+[{"title":"prueba4","price":500,"thumbnail":"prueba4.jpg","id":1},{"title":"prueba3","price":600,"thumbnail":"prueba4.jpg","id":2},{"title":"prueba5","price":700,"thumbnail":"prueba5.jpg","id":3},{"title":"prueba6","price":800,"thumbnail":"prueba6.jpg","id":4},{"title":"prueba7","price":900,"thumbnail":"prueba7.jpg","id":5}]
