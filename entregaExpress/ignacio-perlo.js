@@ -87,6 +87,6 @@ app.get('/productosRandom', function (req, res) {
     res.send(cont._productos[pos]);
   })
 
-server=app.listen(3000,()=>{
+server=app.listen(8080,()=>{
     console.log("escuchando");
 })
