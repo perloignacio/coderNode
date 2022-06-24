@@ -1,0 +1,33 @@
+<%- include("../partials/head")%>
+<div class="row">
+    <div class="col-md-12 text-end">
+        <a href="/" class="btn btn-primary">Nuevo producto</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% productos.forEach(function(p){ %>
+                <tr>
+                <td><%=p.id%></td>
+                <td><%=p.title%></td>
+                <td><%=p.price%></td>
+                <td><img src='<%=p.thumbnail%>' width="50"></td>
+                
+                
+                </tr>
+                <% })%>    
+            </tbody>
+        </table>
+    </div>
+</div>
+<%- include("../partials/footer")%>

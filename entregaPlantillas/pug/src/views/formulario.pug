@@ -1,0 +1,22 @@
+link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous')
+.container
+  .row
+    .col-md-12.text-right
+      a.btn.btn-primary(href='/productos') Ver productos
+  .row
+    .col-md-12
+      form(method='post' action='productos')
+        .row
+          .col-6
+            label Nombre
+            input.form-control(type='text' name='title')
+          .col-6
+            label Precio
+            input.form-control(type='text' name='price')
+        .row.mt-3
+          .col-6
+            label URL Thumbs
+            input.form-control(type='text' name='thumbnail')
+        .row
+          .col-6
+            input.btn.btn-primary.mt-3(type='submit' value='Enviar')
