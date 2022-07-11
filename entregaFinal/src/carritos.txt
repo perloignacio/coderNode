@@ -1,1 +1,1 @@
-[{"id":1,"timestamp":0,"productos":[2,1]}]
+[{"id":1,"timestamp":0,"productos":[2,1]},{"id":2,"timestamp":1657309363146,"productos":[]},{"id":3,"timestamp":1657309418031,"productos":[]},{"id":"4","timestamp":1657309479898,"productos":["3"]}]

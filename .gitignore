@@ -5,3 +5,4 @@ entregaPlantillas/pug/node_modules
 entregaSocket/node_modules
 entregaFinal/node_modules
 entregaBD/node_modules
+entregaFinal/src/firebase.json

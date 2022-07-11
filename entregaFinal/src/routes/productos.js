@@ -1,48 +1,63 @@
-const express = require('express');
-const auth=require('../middleware/admin')
-const router = express.Router();
-const producto =require('../models/productos');
-p=new producto();
-p.iniciar();
-
-
-router.get('/productos/:id?', function (req, res) {
-    let id = req.params.id;
-    if (!id) {
-        res.json(p.getAll());
-    }else{
-        res.json(p.getById(id));
-    }
-   
-})
 
 
 
-router.post('/productos',auth.esAdmin, function (req, res, next) {  
-    p.save(req.body);
-    res.json("Ok");
-});
+function productosRoute(iproducto){
+    const express = require('express');
+    const auth=require('../middleware/admin')
+    const asyncHandler = require('express-async-handler')
+    const router = express.Router();
 
-router.put('/productos/:id',auth.esAdmin, function (req, res, next) {
+    iproducto.iniciar();
+    router.get('/productos/:id?',async (req, res) => {
+        
+        let id = req.params.id;
+        if (!id) {
+            let resultado =await iproducto.getAll();
+            res.json(resultado);
+        }else{
+            let resultado =await iproducto.getById(id)
+            res.json(resultado);
+        }
+       
+    })
+
+    router.post('/productos',auth.esAdmin, async (req, res) => {
+        let resultado=await iproducto.insert(req.body);
+        if(resultado){
+            res.json("Ok");
+        }else{
+            res.json("Error");
+        }
+        
+    });
     
-    if(p.update(req.params.id,req.body)){
-        res.json("Ok");
-    }else{
-        res.status(404).json({error:"Producto no encontrado"});
-    }
+    router.put('/productos/:id',auth.esAdmin, async (req, res) => {
+        let resultado=await iproducto.update(req.params.id,req.body);
+        if(resultado){
+            res.json("Ok");
+        }else{
+            res.status(404).json({error:"Producto no encontrado"});
+        }
+        
+    });
     
-});
-
-
-router.delete('/productos/:id', auth.esAdmin,function (req, res, next) {
     
-    if(p.deleteById(req.params.id)){
-        res.json("Ok");
-    }else{
-        res.status(404).json({error:"Producto no encontrado"});
-    }
+    router.delete('/productos/:id', auth.esAdmin,async function (req, res, next) {
+        let resultado=await iproducto.deleteById(req.params.id)
+        if(resultado){
+            res.json("Ok");
+        }else{
+            res.status(404).json({error:"Producto no encontrado"});
+        }
+        
+    });
     
-});
+    return router;
+}
 
 
-module.exports = router;
+
+
+
+
+module.exports = productosRoute;
