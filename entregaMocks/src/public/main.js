@@ -35,15 +35,30 @@ async function render(productos){
     
 }
 
-async function renderMsj(mensajes){
-	console.log(mensajes)
+async function renderMsj(mensajesNormalizdo){
+	const authorSchema = new normalizr.schema.Entity('autores')
+	const messageSchema = new normalizr.schema.Entity('mensajes', {
+		autor: authorSchema,
+		},{idAttribute:'_id'}
+	)
+	const global = new normalizr.schema.Entity('global', {
+		messages: [messageSchema],
+	})
+	
+	let lengthCoprimido=JSON.stringify(mensajesNormalizdo.entities).length;
+	const dataDeNormalized = normalizr.denormalize(mensajesNormalizdo.result, global, mensajesNormalizdo.entities)
+	console.log(lengthCoprimido)
+	let lengthDesCoprimido=JSON.stringify(dataDeNormalized).length;
+	console.log(lengthDesCoprimido)
+	let mensajes=dataDeNormalized.messages;
+	
 	const template = await fetch('plantillas/mensajes.hbs')
 	const textTemplate = await template.text()
 	const functionTemplate = Handlebars.compile(textTemplate)
 	const html = functionTemplate({ mensajes })
     
 	document.querySelector('#listaMensajes').innerHTML = html
-    
+    document.querySelector('#compresion').innerHTML = (100-parseInt((lengthCoprimido*100)/lengthDesCoprimido)).toString()
 }
 
 const agregarMsj = document.querySelector('#frmMensajes')

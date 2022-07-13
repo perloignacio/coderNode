@@ -1,6 +1,9 @@
 const express = require('express')
-
-
+const util = require('util')
+function print(objeto) {
+  console.log(util.inspect(objeto, false, 12, true))
+}
+const { normalize, denormalize, schema } = require('normalizr');
 const {Server: HttpServer} = require('http')
 const {Server: IOServer} = require('socket.io')
 const handlebars=require("express-handlebars");
@@ -13,11 +16,14 @@ msj=new mensajes();
 msj.iniciar();
 p.iniciar();
 
-const normalizr=require("normalizr");
-const schema=normalizr.schema;
+const authorSchema = new schema.Entity('autores')
+const messageSchema = new schema.Entity('mensajes', {
+  autor: authorSchema,
+},{idAttribute:'_id'})
+const global = new schema.Entity('global', {
+  messages: [messageSchema],
+})
 
-//const mensajes=new schema.Entity('mensaje')
-const autor=new schema.Entity('autor')
 
 
 
@@ -47,9 +53,10 @@ io.on('connection', (socket) => {
 	})
 
 	socket.on('listamensajes',  async (callback) => {
-		let data=await msj.getAll();
-		const norma=normalizr.normalize(data,[autor])
-		//console.log(JSON.stringify(norma));
+		let messages = JSON.parse(JSON.stringify(await msj.getAll()));
+		const data = { id: 'mensajes',messages }
+		const norma=normalize(data,global)
+		print(norma);
 		io.sockets.emit('mensajes',norma)		
 	})
 
@@ -61,7 +68,10 @@ io.on('connection', (socket) => {
 	
 	socket.on('agregarMensaje', async(data) => {
 		msj.guardar(data);
-		let mensajes=await msj.getAll();
-		io.sockets.emit('mensajes',mensajes)	
+		let messages = JSON.parse(JSON.stringify(await msj.getAll()));
+		const datos = { id: 'mensajes',messages }
+		const norma=normalize(datos,global)
+		//print(norma);
+		io.sockets.emit('mensajes',norma)		
 	})
 })
