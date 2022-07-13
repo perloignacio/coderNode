@@ -58,7 +58,7 @@ async function renderMsj(mensajesNormalizdo){
 	const html = functionTemplate({ mensajes })
     
 	document.querySelector('#listaMensajes').innerHTML = html
-    document.querySelector('#compresion').innerHTML = (100-parseInt((lengthCoprimido*100)/lengthDesCoprimido)).toString()
+    document.querySelector('#compresion').innerHTML = (parseInt((lengthCoprimido*100)/lengthDesCoprimido)).toString()
 }
 
 const agregarMsj = document.querySelector('#frmMensajes')
