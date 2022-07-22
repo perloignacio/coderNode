@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-6">
+        <H2>Bienvenido {{usuario}}</H2>
+    </div>
+    <div class="col-md-2 text-right">
+        <form id="formsalir" method="post" action="salir">
+            <input type="submit" class="btn btn-primary" value="SALIR">
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="contentform card shadow">
+            <form id="frmProductos" name="frmProductos">
+                <div class="row">
+                    <div class="col-4">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                    <div class="col-4">
+                        <label>Precio</label>
+                        <input type="text" class="form-control" id="price" name="price">
+                    </div>
+                    <div class="col-4">
+                        <label>URL Thumbs</label>
+                        <input type="text" class="form-control" id="thumbnail" name="thumbnail">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <input type="submit" class="btn btn-primary mt-3" value="Enviar">
+                    </div>
+                    
+                </div>
+                
+            
+            </form>
+        </div>
+        <div id="listado" class="mt-5"></div>
+    </div>
+    <div class="col-md-4">
+        <h2 class="mb-2">Compresión de mensajes <span id="compresion"></span> %</h2>
+        <div class="listaMensajes card mt-3" id="listaMensajes">
+
+        </div>
+        <div class="formMensajes mt-3">
+            <form id="frmMensajes" name="frmMensajes">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mt-3" id="autor" placeholder="email" name="autor">
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control mt-3" id="mensaje" name="mensaje" placeholder="Mensaje"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <input type="submit" class="btn btn-primary mt-3" value="Enviar">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.2/dist/normalizr.browser.min.js"></script>
+<script src="main.js"></script>
