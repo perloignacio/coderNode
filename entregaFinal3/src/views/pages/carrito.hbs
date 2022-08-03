@@ -1,0 +1,47 @@
+{{> menu}}
+<div class="listadoproductos">
+    <div class="row">
+        {{#each items}}
+            <div class="col-md-12">
+                <div class="item producto">
+                    <div class="row">
+                        <div class="col-md-3">
+                             <div class="foto">
+                                <img src="{{this.producto.foto}}">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <h4>{{this.producto.nombre}}</h4>
+                            <p>{{this.producto.descripcion}}</p>
+                            <form method="post" action="api/carrito/quitarProducto">
+                                <input type="hidden" name="id_prod" value="{{this.producto._id}}">
+                                <button type="submit" class="btn btn-danger">QUITAR</button>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <h2>{{this.cantidad}}</h2>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <h3>$ {{this.producto.precio}}</h3>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post" action="api/carrito/vaciar">
+                <button type="submit" class="btn btn-danger">VACIAR CARRITO</button>
+            </form>
+            
+        </div>
+        <div class="col-md-4 text-right">
+            <h2>$ {{total}}</h2>
+            <form method="post" action="api/carrito/confirmar">
+                <button type="submit" class="btn btn-success">CONFIRMAR COMPRA</button>
+            </form>
+        </div>
+    </div>
+</div>

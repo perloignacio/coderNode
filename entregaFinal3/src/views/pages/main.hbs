@@ -1,0 +1,32 @@
+{{> menu}}
+<div class="listadoproductos">
+    <div class="row">
+        {{#each productos}}
+            <div class="col-md-3">
+                <div class="card producto">
+                    <div class="foto">
+                        <img src="{{this.foto}}">
+                    </div>
+                    <div class="info">
+                        <h4>{{this.nombre}}</h4>
+                        <p>{{this.descripcion}}</p>
+                        <h3>${{this.precio}}</h3>
+                        <form name="frmcarrito" method="post" action="api/carrito/productos">
+                            <input type="hidden" name="idproducto" value="{{this._id}}">
+                            <div class="precio">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="number" name="cantidad" id="cantidad" class="form-control" value="1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-primary" type="submit">COMPRAR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
